@@ -17,3 +17,12 @@ python-dotenv>=1.0.1
 aiofiles>=24.1.0
 email-validator>=2.2.0
 razorpay>=1.4.1
+fastapi
+uvicorn
+pymongo
+python-dotenv
+passlib[bcrypt]
+python-jose
+python-multipart
+email-validator
+dnspython

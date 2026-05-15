@@ -1,0 +1,75 @@
+<!-- disease-result.html -->
+{% extends 'layout.html' %} {% block body %}
+
+<div class="container result-container">
+  <div class="row justify-content-center">
+    <div class="col-lg-9 col-md-10">
+      <div class="result-card disease-result-card">
+        <!-- Icon -->
+        <div class="result-icon disease-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="64"
+            height="64"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+            />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="12" y1="18" x2="12" y2="12" />
+            <line x1="9" y1="15" x2="15" y2="15" />
+          </svg>
+        </div>
+
+        <!-- Title -->
+        <h1 class="result-title">Disease Analysis Complete</h1>
+
+        <!-- Disease Result Content -->
+        <div class="disease-result-content">{{ prediction | safe }}</div>
+
+        <!-- Action Buttons -->
+        <div class="result-actions">
+          <a href="{{ url_for('disease_prediction') }}" class="btn-secondary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+              <polyline points="17 8 12 3 7 8" />
+              <line x1="12" y1="3" x2="12" y2="15" />
+            </svg>
+            Analyze Another Image
+          </a>
+          <a href="{{ url_for('home') }}" class="btn-primary">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+            Back to Home
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

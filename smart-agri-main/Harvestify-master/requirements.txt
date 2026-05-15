@@ -1,0 +1,14 @@
+Flask
+Flask-Login
+Flask-SQLAlchemy
+python-dotenv
+numpy
+pandas
+requests
+scikit-learn
+torch
+torchvision
+Pillow
+MarkupSafe
+gunicorn
+pymysql

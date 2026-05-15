@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Green Grow - Smart Agriculture Platform</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Green Grow - Empowering farmers with AI-powered smart agriculture solutions for crop recommendation, fertilizer guidance, and disease detection."
+    />
+
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='images/favicon.ico') }}"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="{{ url_for('static', filename='css/font-awesome.min.css') }}"
+      rel="stylesheet"
+    />
+
+    <!-- Custom CSS -->
+    <link
+      href="{{ url_for('static', filename='css/style.css') }}"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('home') }}">
+          <img
+            src="{{ url_for('static', filename='images/logo.jpg') }}"
+            alt="Green Grow Logo"
+          />
+          <span>Green Grow</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto align-items-center">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            </li>
+
+            {% if current_user.is_authenticated %}
+            <!-- Show these links when user is logged in -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('dashboard') }}"
+                >Dashboard</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('logout') }}">
+                <i class="fa fa-sign-out"></i> Logout
+              </a>
+            </li>
+            {% else %}
+            <!-- Show these links when user is NOT logged in -->
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">
+                <i class="fa fa-sign-in"></i> Login
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-register" href="{{ url_for('register') }}">
+                <i class="fa fa-user-plus"></i> Sign Up
+              </a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item">
+              <button
+                class="theme-toggle"
+                id="theme-toggle-btn"
+                aria-label="Toggle theme"
+              >
+                <span id="theme-icon">🌙</span>
+                <span id="theme-text">Dark</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="page-transition">{% block body %}{% endblock %}</main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row footer-content">
+          <!-- Brand Section -->
+          <div class="col-lg-4 col-md-6 footer-section">
+            <div class="footer-logo">Green Grow</div>
+            <p class="footer-text">
+              Empowering farmers with AI-powered smart agriculture solutions for
+              better crop yields, healthier plants, and sustainable farming
+              practices.
+            </p>
+            <div class="footer-social">
+              <a href="#" class="social-link" aria-label="Facebook">
+                <i class="fa fa-facebook"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Twitter">
+                <i class="fa fa-twitter"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="Instagram">
+                <i class="fa fa-instagram"></i>
+              </a>
+              <a href="#" class="social-link" aria-label="LinkedIn">
+                <i class="fa fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="col-lg-2 col-md-6 footer-section">
+            <h3 class="footer-heading">Quick Links</h3>
+            <ul class="footer-links-list">
+              <li>
+                <a href="{{ url_for('home') }}" class="footer-link">Home</a>
+              </li>
+              <li>
+                <a href="{{ url_for('home') }}#about" class="footer-link"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a href="{{ url_for('home') }}#services" class="footer-link"
+                  >Services</a
+                >
+              </li>
+              <li><a href="#" class="footer-link">Contact</a></li>
+            </ul>
+          </div>
+
+          <!-- Our Services -->
+          <div class="col-lg-3 col-md-6 footer-section">
+            <h3 class="footer-heading">Our Services</h3>
+            <ul class="footer-links-list">
+              <li>
+                <a href="{{ url_for('crop_recommend') }}" class="footer-link"
+                  >Crop Recommendation</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{{ url_for('fertilizer_recommendation') }}"
+                  class="footer-link"
+                  >Fertilizer Guidance</a
+                >
+              </li>
+              <li>
+                <a
+                  href="{{ url_for('disease_prediction') }}"
+                  class="footer-link"
+                  >Disease Detection</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Contact Info -->
+          <div class="col-lg-3 col-md-6 footer-section">
+            <h3 class="footer-heading">Get In Touch</h3>
+            <ul class="footer-contact">
+              <li>
+                <i class="fa fa-map-marker"></i>
+                <span>India</span>
+              </li>
+              <li>
+                <i class="fa fa-envelope"></i>
+                <span>info@greengrow.com</span>
+              </li>
+              <li>
+                <i class="fa fa-phone"></i>
+                <span>+91 000 000 0000</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <p class="footer-text mb-0">
+            developed by team green grow <span class="heart">❤️</span> in India
+          </p>
+          <p class="footer-text mb-0">
+            
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scroll-top-btn" aria-label="Scroll to top">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+      >
+        <line x1="12" y1="19" x2="12" y2="5" />
+        <polyline points="5 12 12 5 19 12" />
+      </svg>
+    </button>
+
+    <!-- Bootstrap JavaScript -->
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Custom JavaScript - CORRECTED PATHS -->
+    <!-- Custom JavaScript -->
+    <!-- Custom JavaScript -->
+    <!-- Custom JavaScript -->
+    <script src="{{ url_for('static', filename='scripts/theme-toggle.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/navbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/scroll-to-top.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/image-preview.js') }}"></script>
+    <script src="{{ url_for('static', filename='scripts/form-validation.js') }}"></script>
+    <!-- hero-animation.js REMOVED -->
+  </body>
+</html>

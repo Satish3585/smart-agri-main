@@ -1,0 +1,40 @@
+# Node
+node_modules/
+**/node_modules/
+npm-debug.log*
+yarn-error.log
+yarn-debug.log
+/dist
+/build
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv/
+venv/
+env/
+pip-log.txt
+*.pyc
+*.pyo
+
+# IDEs
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Model files
+models/*.pth
+*.h5
+*.keras
+*.ckpt
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log

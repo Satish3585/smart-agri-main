@@ -1,0 +1,44 @@
+<!-- try_again.html -->
+{% extends 'layout.html' %}
+{% block body %}
+
+<div class="container result-container">
+  <div class="row justify-content-center">
+    <div class="col-lg-7 col-md-9">
+      <div class="error-card">
+        <div class="error-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <h1 class="error-title">Oops! Something Went Wrong</h1>
+        <p class="error-message">
+          We're sorry, but we couldn't process your request at this time. This could be due to invalid input, server issues, or network problems.
+        </p>
+        <div class="error-suggestions">
+          <h3>What you can do:</h3>
+          <ul>
+            <li>Check your input values and try again</li>
+            <li>Ensure you have a stable internet connection</li>
+            <li>Try refreshing the page</li>
+            <li>Contact support if the problem persists</li>
+          </ul>
+        </div>
+        <div class="error-actions">
+          <a href="javascript:history.back()" class="btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="19" y1="12" x2="5" y2="12"/>
+              <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Go Back
+          </a>
+          <a href="{{ url_for('home') }}" class="btn-primary">Return to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

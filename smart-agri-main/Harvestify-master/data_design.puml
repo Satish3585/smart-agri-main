@@ -1,0 +1,73 @@
+@startuml
+!theme plain
+title Harvestify Data Design (ERD)
+skinparam linetype ortho
+skinparam nodesep 60
+skinparam ranksep 50
+
+package "SQL Database (User Management)" {
+    entity "User" as User {
+        *id : Integer <<PK>>
+        --
+        *username : String(80) <<Unique>>
+        *email : String(120) <<Unique>>
+        *password_hash : String(255)
+        full_name : String(120)
+        phone : String(20)
+        created_at : DateTime
+        last_login : DateTime
+        is_active : Boolean
+    }
+}
+
+package "Static Data Sources (CSV/Reference)" {
+    entity "Fertilizer Data" as Fert {
+        *Crop : String <<PK>>
+        --
+        N : Integer (Nitrogen)
+        P : Integer (Phosphorous)
+        K : Integer (Potassium)
+        pH : Float
+        soil_moisture : Float
+    }
+
+    entity "Disease Dictionary" as Disease {
+        *Disease_Name : String <<Key>>
+        --
+        Description : String
+        Symptoms : List<String>
+        Treatment : List<String>
+    }
+    
+    entity "Crop Dictionary" as CropDict {
+        *Crop_Label : Integer <<Key>>
+        --
+        Crop_Name : String
+    }
+}
+
+' Force Vertical Layout
+User -[hidden]down- Fert
+Fert -[hidden]down- Disease
+Disease -[hidden]down- CropDict
+
+' Notes
+note right of User
+  Source: app/models.py
+  Managed via SQLAlchemy
+  Stored in SQLite
+end note
+
+note right of Fert
+  Source: app/Data/fertilizer.csv
+  Used for Gap Analysis in
+  Fertilizer Suggestion Module
+end note
+
+note right of Disease
+  Source: Internal Python Dictionary
+  Used for displaying results
+  in Disease Detection Module
+end note
+
+@enduml

@@ -1,0 +1,109 @@
+@startuml
+skinparam style strictuml
+actor User
+participant "Web Interface" as Web
+participant "Input Validation" as Valid
+participant "Crop Recommendation" as Crop
+participant "Fertilizer Suggestion" as Fert
+participant "Disease Detection" as Disease
+participant "Weather API" as Weather
+participant "Data Sources\n(CSV/Dicts)" as Data
+participant "ML Model (Random Forest)" as ML
+participant "DL Model (ResNet9)" as DL
+
+' === Flow 1: Crop Recommendation ===
+== Crop Recommendation Flow ==
+
+User -> Web: Enter soil parameters
+activate Web
+Web -> Valid: Validate input (Internal Logic)
+activate Valid
+
+Valid --> Web: Input validated
+deactivate Valid
+
+Web -> Crop: Submit N, P, K, pH, rainfall, city
+activate Crop
+
+Crop -> Weather: Fetch weather data
+activate Weather
+Weather --> Crop: Return temperature, humidity
+deactivate Weather
+
+Crop -> ML: Process 7 features
+activate ML
+ML --> Crop: Predicted crop
+deactivate ML
+
+Crop --> Web: Show recommendation
+deactivate Crop
+
+Web --> User: Display crop result
+deactivate Web
+
+' === Flow 2: Fertilizer Suggestion ===
+== Fertilizer Suggestion Flow ==
+
+User -> Web: Enter N, P, K levels and crop
+activate Web
+
+Web -> Valid: Validate NPK values
+activate Valid
+
+Valid --> Web: Input validated
+deactivate Valid
+
+Web -> Fert: Submit current NPK and crop
+activate Fert
+
+Fert -> Data: Read optimal NPK (fertilizer.csv)
+activate Data
+Data --> Fert: Return optimal NPK
+deactivate Data
+
+Fert -> Fert: Calculate nutrient deficit
+
+Fert -> Data: Get advice (fertilizer_dic)
+activate Data
+Data --> Fert: Return suggestions
+deactivate Data
+
+Fert --> Web: Show fertilizer advice
+deactivate Fert
+
+Web --> User: Display fertilizer result
+deactivate Web
+
+' === Flow 3: Disease Detection ===
+== Disease Detection Flow ==
+
+User -> Web: Upload plant image
+activate Web
+
+Web -> Valid: Validate image file
+activate Valid
+Valid --> Web: File validated
+deactivate Valid
+
+Web -> Disease: Submit image
+activate Disease
+
+Disease -> Disease: Preprocess image
+
+Disease -> DL: Classify disease
+activate DL
+DL --> Disease: Disease result (38 classes)
+deactivate DL
+
+Disease -> Data: Get disease info (disease_dic)
+activate Data
+Data --> Disease: Treatment recommendations
+deactivate Data
+
+Disease --> Web: Show disease result
+deactivate Disease
+
+Web --> User: Display disease diagnosis
+deactivate Web
+
+@enduml

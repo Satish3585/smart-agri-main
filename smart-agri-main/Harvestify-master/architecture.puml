@@ -1,0 +1,37 @@
+@startuml
+!theme plain
+title Harvestify System Architecture
+
+package "Client" {
+    [User / Web Browser] as User
+}
+
+package "Web Server" {
+    [app.py Controller] as App
+    [Auth Manager] as Auth
+    [HTML Templates] as Templates
+}
+
+package "Data Layer" {
+    database "User Database" as DB
+    file "Fertilizer Data CSV" as CSV
+}
+
+package "ML Models" {
+    [ResNet9 (Disease Detection)] as ResNet
+    [Random Forest (Crop Rec.)] as RF
+    [Fertilizer Logic] as Logic
+}
+
+User --> App : HTTP GET/POST
+App --> Templates : Renders
+Templates --> User : HTML
+
+App --> Auth : Authenticates
+Auth --> DB : Read/Write
+
+App --> ResNet : Image Input
+App --> RF : Soil Data
+App --> Logic : Soil Data
+Logic --> CSV : Reads
+@enduml

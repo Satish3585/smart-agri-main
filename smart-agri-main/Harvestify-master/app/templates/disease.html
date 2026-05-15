@@ -1,0 +1,64 @@
+<!-- disease.html -->
+{% extends 'layout.html' %}
+{% block body %}
+
+<div class="page-header">
+  <h1>Plant Disease Detection</h1>
+  <p>Upload an image of your plant to identify diseases and get treatment recommendations</p>
+</div>
+
+<div class="container form-container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="form-card upload-card">
+        <form class="prediction-form" method="post" enctype="multipart/form-data">
+          
+          <div class="upload-section">
+            <div class="upload-preview" id="preview-container">
+              <img id="output-image" class="preview-image" alt="Preview" style="display: none;" />
+              <div class="upload-placeholder" id="upload-placeholder">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+                <p>Click or drag image to upload</p>
+                <span class="upload-formats">Supported formats: JPG, PNG, JPEG</span>
+              </div>
+            </div>
+            
+            <label for="inputfile" class="file-input-label">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+              Choose Image
+            </label>
+            <input 
+              type="file" 
+              name="file" 
+              class="file-input" 
+              id="inputfile" 
+              onchange="preview_image(event)" 
+              accept="image/*"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn-submit" id="submit-btn" disabled>
+            <span>Analyze Disease</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/image-preview.js') }}"></script>
+
+{% endblock %}

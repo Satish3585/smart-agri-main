@@ -1,0 +1,164 @@
+<!-- fertilizer.html -->
+{% extends 'layout.html' %} {% block body %}
+
+<div class="page-header">
+  <h1>Fertilizer Recommendation System</h1>
+  <p>
+    Get personalized fertilizer advice based on your soil composition and crop
+    selection
+  </p>
+</div>
+
+<div class="container form-container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="form-card">
+        {% if error %}
+        <div class="alert alert-error">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <line x1="15" y1="9" x2="9" y2="15" />
+            <line x1="9" y1="9" x2="15" y2="15" />
+          </svg>
+          <span>{{ error }}</span>
+        </div>
+        {% endif %}
+
+        <form
+          method="POST"
+          action="{{ url_for('fert_recommend') }}"
+          class="prediction-form"
+        >
+          <div class="form-row">
+            <div class="form-group">
+              <label for="Nitrogen">
+                <span class="label-icon">N</span>
+                Nitrogen Level
+              </label>
+              <input
+                type="number"
+                class="form-control"
+                id="Nitrogen"
+                name="nitrogen"
+                placeholder="e.g., 50"
+                required
+                min="0"
+              />
+              <span class="input-hint">Current nitrogen content in kg/ha</span>
+            </div>
+
+            <div class="form-group">
+              <label for="Phosphorous">
+                <span class="label-icon">P</span>
+                Phosphorous Level
+              </label>
+              <input
+                type="number"
+                class="form-control"
+                id="Phosphorous"
+                name="phosphorous"
+                placeholder="e.g., 50"
+                required
+                min="0"
+              />
+              <span class="input-hint"
+                >Current phosphorous content in kg/ha</span
+              >
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="Pottasium">
+                <span class="label-icon">K</span>
+                Potassium Level
+              </label>
+              <input
+                type="number"
+                class="form-control"
+                id="Pottasium"
+                name="pottasium"
+                placeholder="e.g., 50"
+                required
+                min="0"
+              />
+              <span class="input-hint">Current potassium content in kg/ha</span>
+            </div>
+
+            <div class="form-group">
+              <label for="crop">
+                <span class="label-icon">🌾</span>
+                Target Crop
+              </label>
+              <select
+                name="cropname"
+                class="form-control form-select-custom"
+                id="crop"
+                required
+              >
+                <option value="" disabled selected>Select your crop</option>
+                <optgroup label="Cereals">
+                  <option value="rice">Rice</option>
+                  <option value="maize">Maize</option>
+                </optgroup>
+                <optgroup label="Pulses">
+                  <option value="chickpea">Chickpea</option>
+                  <option value="kidneybeans">Kidney Beans</option>
+                  <option value="pigeonpeas">Pigeon Peas</option>
+                  <option value="mothbeans">Moth Beans</option>
+                  <option value="mungbean">Mung Bean</option>
+                  <option value="blackgram">Black Gram</option>
+                  <option value="lentil">Lentil</option>
+                </optgroup>
+                <optgroup label="Fruits">
+                  <option value="pomegranate">Pomegranate</option>
+                  <option value="banana">Banana</option>
+                  <option value="mango">Mango</option>
+                  <option value="grapes">Grapes</option>
+                  <option value="watermelon">Watermelon</option>
+                  <option value="muskmelon">Muskmelon</option>
+                  <option value="apple">Apple</option>
+                  <option value="orange">Orange</option>
+                  <option value="papaya">Papaya</option>
+                  <option value="coconut">Coconut</option>
+                </optgroup>
+                <optgroup label="Cash Crops">
+                  <option value="cotton">Cotton</option>
+                  <option value="jute">Jute</option>
+                  <option value="coffee">Coffee</option>
+                </optgroup>
+              </select>
+              <span class="input-hint">Crop you want to grow</span>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            <span>Get Recommendation</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+@startuml
+!theme plain
+title Harvestify Data Flow Diagram
+skinparam linetype ortho
+skinparam nodesep 100
+skinparam ranksep 60
+skinparam padding 10
+
+actor "User" as User
+rectangle "Weather API" as API
+
+package "Harvestify System" {
+    rectangle "Input Validation" as Valid
+    database "User DB" as DB
+    
+    rectangle "Crop Recommendation" as CropProc
+    rectangle "Fertilizer Suggestion" as FertProc
+    rectangle "Disease Detection" as DiseaseProc
+    
+    database "Fertilizer Data" as CSV
+    rectangle "ML Inference Engine" as ML
+}
+
+' Top Level
+User -down-> Valid : Submit Data
+Valid -right-> DB : Verify Credentials
+
+' Process Split
+Valid -down-> CropProc : Soil Data
+Valid -down-> FertProc : NPK Data
+Valid -down-> DiseaseProc : Image
+
+' External & Data
+CropProc -right-> API : Fetch Weather
+FertProc -down-> CSV : Read Standards
+
+' ML Integration
+CropProc -down-> ML : Predict Crop
+DiseaseProc -down-> ML : Predict Disease
+
+' Feedback (Hidden lines to force layout, explicit arrows for logic)
+CropProc -[hidden]down- ML
+DiseaseProc -[hidden]down- ML
+
+@enduml

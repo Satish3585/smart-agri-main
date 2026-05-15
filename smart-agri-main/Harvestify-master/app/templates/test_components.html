@@ -1,0 +1,46 @@
+<!-- test_components.html -->
+<form class="md-form">
+  <div class="file-field">
+    <div class="z-depth-1-half mb-4">
+      <img
+        src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+        class="img-fluid"
+        alt="example placeholder"
+      />
+    </div>
+    <div class="d-flex justify-content-center">
+      <div class="btn btn-mdb-color btn-rounded float-left">
+        <span
+          style="
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00ff00;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            animation: pulse 1.5s infinite;
+          "
+        >
+          Choose file
+        </span>
+
+        <style>
+          @keyframes pulse {
+            0% {
+              box-shadow: 0 0 0px #00ff00;
+            }
+            50% {
+              box-shadow: 0 0 15px #00ff00;
+            }
+            100% {
+              box-shadow: 0 0 0px #00ff00;
+            }
+          }
+        </style>
+
+        <input type="file" />
+      </div>
+    </div>
+  </div>
+</form>

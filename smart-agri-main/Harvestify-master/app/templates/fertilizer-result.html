@@ -1,0 +1,57 @@
+<!-- fertilizer-result.html -->
+{% extends 'layout.html' %}
+{% block body %}
+
+<div class="container result-container">
+  <div class="row justify-content-center">
+    <div class="col-lg-9 col-md-10">
+      <div class="result-card">
+        <div class="result-icon fertilizer-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+          </svg>
+        </div>
+        <h1 class="result-title">Fertilizer Recommendation</h1>
+        
+        {% if crop_name %}
+        <p class="result-crop-name">For crop: <strong>{{ crop_name }}</strong></p>
+        {% endif %}
+        
+        <div class="result-content">
+          <div class="fertilizer-recommendation">
+            {{ recommendation | safe }}
+          </div>
+        </div>
+        
+        <!-- Show warnings if present (but not critical) -->
+        {% if warnings %}
+        <div class="warnings-section">
+          <h3 class="warnings-title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            Additional Recommendations
+          </h3>
+          <ul class="warnings-list">
+            {% for warning in warnings %}
+            <li>{{ warning }}</li>
+            {% endfor %}
+          </ul>
+          <p class="warning-note">
+            <strong>Note:</strong> While fertilizer recommendations are provided, consider getting a comprehensive soil test for more accurate results.
+          </p>
+        </div>
+        {% endif %}
+        
+        <div class="result-actions">
+          <a href="{{ url_for('fertilizer_recommendation') }}" class="btn-secondary">New Analysis</a>
+          <a href="{{ url_for('home') }}" class="btn-primary">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
